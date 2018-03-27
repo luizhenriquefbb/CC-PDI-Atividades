@@ -10,13 +10,14 @@ def main():
 	# A imagem lida eh um array[linha][coluna]
 	img = cv2.imread(config.imageToRead)
 	# img = cv2.cvtColor(cv2.imread(config.imageToRead),  cv2.COLOR_BGR2RGB)
+	
 
 	# Converter todos os pixels para YIQ
-	img2 = convertAllRGBtoYIQ(img)
+	img2 = convertAllBGRtoYIQ(img)
 
 	
 	# Converter todos os pixels para RGB
-	img3 =  convertAllYIQtoRGB(img2)
+	img3 =  convertAllYIQtoBGR(img2)
 
 
 	# exibir imagem em uma janela separada
@@ -26,12 +27,12 @@ def main():
 
 	
 	# salvar arquivo transformado
-	# TODO: cv2.imwrite('image.png',img3)
+	cv2.imwrite('newImage.png',img3)
 
 
 
 
-def RGBtoYIQ(b,g,r):
+def BGRtoYIQ(b,g,r):
 	y = 0.299*r + 0.587*g + 0.114*b
 	i = 0.596*r - 0.274*g - 0.322*b
 	q = 0.211*r - 0.523*g + 0.312*b
@@ -39,7 +40,7 @@ def RGBtoYIQ(b,g,r):
 
 	return [trunc(y),trunc(i),trunc(q)]
 
-def YIQtoRGB(y,i,q):
+def YIQtoBGR(y,i,q):
 	r = (y + 0.956*i + 0.621*q)
 	if r > 255:
 		r = 255
@@ -72,11 +73,11 @@ def convertArrayToNumpy(array):
 
 	return array_numPy
 
-def convertAllRGBtoYIQ(img):
+def convertAllBGRtoYIQ(img):
 	'''
-	 le todo uma imagem e converte para YIQ pixel a pixel
+	 le toda uma imagem e converte para YIQ pixel a pixel
 	 parametros:
-	 	img: [[[RGB]]]
+	 	img: [[[B,G,R]]]
 	 	return: novaImagem
 	'''
 	height = len(img)
@@ -87,15 +88,16 @@ def convertAllRGBtoYIQ(img):
 	for h in range(height):
 		newImage.append([])
 		for w in range(width):
-			newImage[-1].append(RGBtoYIQ(img[h][w][2], img[h][w][1], img[h][w][0]))
+			# print(img[h][w])
+			newImage[-1].append(BGRtoYIQ(*img[h][w]))
 
 	return convertArrayToNumpy(newImage)
 
-def convertAllYIQtoRGB(img):
+def convertAllYIQtoBGR(img):
 	'''
-	 le todo uma imagem e converte para RGB pixel a pixel
+	 le toda uma imagem e converte para BGR pixel a pixel
 	 parametros:
-	 	img: [[[YIQ]]]
+	 	img: [[[Y,I,Q]]]
 	 	return: novaImagem
 	'''
 	height = len(img)
@@ -106,7 +108,8 @@ def convertAllYIQtoRGB(img):
 	for h in range(height):
 		newImage.append([])
 		for w in range(width):
-			newImage[-1].append(YIQtoRGB(img[h][w][2], img[h][w][1], img[h][w][0]))
+			# print(img[h][w])
+			newImage[-1].append(YIQtoBGR(*img[h][w]))
 
 	return convertArrayToNumpy(newImage)
 
