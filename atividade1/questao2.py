@@ -1,32 +1,31 @@
-import pdb
 from numpy import mean
 
-def calculateMeanAndAplly(p1,p2,p3):
+def calculateMeanAndAplly(b,g,r):
     '''
     Calcula a media de tres pixels e retorna um pixel com essa media
     '''
     
-    average = mean([p1,p2,p3])
+    average = mean([b,g,r])
 
     return [average,average,average]
 
-def toGreen(p1,p2,p3):
+def toGreen(b,g,r):
     '''
     converte todo o pixel para a banda verde
     '''
-    return [0,p2,0]
+    return [0,g,0]
 
-def toRed (p1,p2,p3):
+def toRed (b,g,r):
     '''
     converte todo o pixel para a banda vermelha
     '''
-    return [0,0,p3]
+    return [0,0,r]
 
-def toBlue (p1,p2,p3):
+def toBlue (b,g,r):
     '''
     converte todo o pixel para a banda azul
     '''
-    return [p1,0,0]
+    return [b,0,0]
     
 
 
