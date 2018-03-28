@@ -7,6 +7,7 @@ from questao1 import *
 from questao2 import *
 from questao3 import *
 from questao4 import *
+from questao5 import *
 
 def main():
 	# ler imagem.
@@ -17,7 +18,8 @@ def main():
 	# imageResult = questao1(img)
 	# imageResult = questao2(img, 'green')
 	# imageResult = questao3(img)
-	imageResult = questao4(img, 100)
+	# imageResult = questao4(img, 100)
+	imageResult = questao5(img, 2)
 
 	# salvar arquivo transformado
 	cv2.imwrite('newImage.png',imageResult)
@@ -102,6 +104,21 @@ def questao4(originalImage, brightness):
 
 	return imageResult
 
+def questao5(originalImage, brightness):
+	'''
+	MUltiplica o brilho de uma imagem
+
+	Parametros:
+		originalImage: Imagem a ser modificada
+		brightness : Variavel a ser multiplicada as cores RGB do pixel
+	'''
+
+	imageResult = None
+
+	imageResult = applyToAllPixels(originalImage, {'fun': mulBrightness, 'parameters': {'brightness': brightness}})
+
+	return imageResult
+
 
 
 def convertArrayToNumpy(array):
@@ -124,7 +141,7 @@ def applyToAllPixels(img, action):
 		action: dicionario que contem duas chaves:
 			'fun': nome da funcao a ser aplicada
 			'parameters': parametros que a funcao usa alem do R,G,B
-			Ex.: Se a funcao a ser passada tiver seus proprios parametros, como 'programar(computador,cafe)', os parametros computador e cafe estarão em outro dicionario separado (o dicionario seria o valor da chave 'parameters'). A chamada da função do exemplo acima ficaria: applyToAllPixels(img,{'fun' : programar, 'parameters' : {'maquina' : computador, 'liquido' : cafe } })
+			Ex.: Se a funcao a ser passada tiver seus proprios parametros, como 'programar(computador,cafe)', os parametros computador e cafe estarao em outro dicionario separado (o dicionario seria o valor da chave 'parameters'). A chamada da funcao do exemplo acima ficaria: applyToAllPixels(img,{'fun' : programar, 'parameters' : {'maquina' : computador, 'liquido' : cafe } })
 	'''
 
 	height = len(img)
