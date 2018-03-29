@@ -1,5 +1,9 @@
 # CC-PDI-Atividades
 
+# Importante:
+Por motivos técnicos a atividade será concluída no repositóro de [Abraao Alisson](https://github.com/AbraaoHonorio/PDI)
+
+
 ## Grupo
 - Abraao Alisson
 - Alisson Galiza
